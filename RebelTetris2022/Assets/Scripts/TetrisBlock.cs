@@ -5,11 +5,14 @@ using UnityEngine;
 public class TetrisBlock : MonoBehaviour
 {
     public Vector3 rotationPoint;
-    private float previousTime;
+    private float previousMoveTime = 0.1f;
+    private float previousFallTime;
     public float fallTime = 0.8f;
     public static int height = 20;
     public static int width = 10;
     private static Transform[,] grid = new Transform[width, height];
+
+    bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
@@ -20,19 +23,25 @@ public class TetrisBlock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) && canMove)
         {
             //move to left
+            canMove = false;
             transform.position += new Vector3(-1, 0, 0);
             if (!ValidMove())
                 transform.position -= new Vector3(-1, 0, 0);
+
+            Invoke("ResetMoveTime", previousMoveTime);
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKey(KeyCode.RightArrow) && canMove)
         {
             //move to right
+            canMove = false;
             transform.position += new Vector3(1, 0, 0);
             if (!ValidMove())
                 transform.position -= new Vector3(1, 0, 0);
+
+            Invoke("ResetMoveTime", previousMoveTime);
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -42,7 +51,7 @@ public class TetrisBlock : MonoBehaviour
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
         }
 
-        if (Time.time - previousTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 10 : fallTime))
+        if (Time.time - previousFallTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 10 : fallTime))
         {
             transform.position += new Vector3(0, -1, 0);
             if (!ValidMove())
@@ -54,7 +63,7 @@ public class TetrisBlock : MonoBehaviour
                 FindObjectOfType<SpawnTetromino>().NewTetromino();
             }
 
-            previousTime = Time.time;
+            previousFallTime = Time.time;
 
             //original code
             //transform.position += new Vector3(0, -1, 0);
@@ -64,6 +73,11 @@ public class TetrisBlock : MonoBehaviour
             //    transform.position -= new Vector3(0, -1, 0);
             //previousTime = Time.time;
         }
+    }
+
+    void ResetMoveTime()
+    {
+        canMove = true;
     }
 
     void CheckForLines()
@@ -99,11 +113,12 @@ public class TetrisBlock : MonoBehaviour
 
     void RowDown(int i)
     {
-        for (int y = 0; y < height; y++)
+        for (int y = i; y < height; y++)
         {
             for (int j = 0; j < width; j++)
             {
-                if(grid[j, y] != null) {
+                if(grid[j, y] != null)
+                {
                     grid[j, y - 1] = grid[j, y];
                     grid[j, y] = null;
                     grid[j, y - 1].transform.position -= new Vector3(0, 1, 0);
