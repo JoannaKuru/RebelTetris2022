@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TetrisBlock : MonoBehaviour
 {
@@ -8,21 +9,23 @@ public class TetrisBlock : MonoBehaviour
     private float previousMoveTime = 0.1f;
     private float previousFallTime;
     public float fallTime = 0.8f;
-    public static int height = 20;
+    public static int height = 25;
     public static int width = 10;
     private static Transform[,] grid = new Transform[width, height];
+    private static bool gameEnded = false;
 
     bool canMove = true;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+
         if (Input.GetKey(KeyCode.LeftArrow) && canMove)
         {
             //move to left
@@ -60,7 +63,9 @@ public class TetrisBlock : MonoBehaviour
                 AddToGrid();
                 CheckForLines();
                 this.enabled = false;
-                FindObjectOfType<SpawnTetromino>().NewTetromino();
+
+                if (!gameEnded)
+                    FindObjectOfType<SpawnTetromino>().NewTetromino();
             }
 
             previousFallTime = Time.time;
@@ -82,9 +87,9 @@ public class TetrisBlock : MonoBehaviour
 
     void CheckForLines()
     {
-        for (int i = height-1; i >= 0; i--)
+        for (int i = height - 1; i >= 0; i--)
         {
-            if(HasLine(i))
+            if (HasLine(i))
             {
                 DeleteLine(i);
                 RowDown(i);
@@ -94,7 +99,7 @@ public class TetrisBlock : MonoBehaviour
 
     bool HasLine(int i)
     {
-        for(int j = 0; j< width; j++)
+        for (int j = 0; j < width; j++)
         {
             if (grid[j, i] == null)
                 return false;
@@ -117,7 +122,7 @@ public class TetrisBlock : MonoBehaviour
         {
             for (int j = 0; j < width; j++)
             {
-                if(grid[j, y] != null)
+                if (grid[j, y] != null)
                 {
                     grid[j, y - 1] = grid[j, y];
                     grid[j, y] = null;
@@ -133,8 +138,19 @@ public class TetrisBlock : MonoBehaviour
         {
             int roundedX = Mathf.RoundToInt(children.transform.position.x);
             int roundedY = Mathf.RoundToInt(children.transform.position.y);
-
             grid[roundedX, roundedY] = children;
+
+            if (roundedY >= 19)
+            {
+                // Lopeta peli
+
+                // Poistaa spawnerin
+                Destroy(FindObjectOfType<SpawnTetromino>());
+                gameEnded = true;
+
+                // Lataa scenen uudestaan
+                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            }
         }
     }
 
@@ -148,7 +164,7 @@ public class TetrisBlock : MonoBehaviour
             if (roundedX < 0 || roundedX >= width || roundedY < 0 || roundedY >= height)
             {
                 return false;
-            }   
+            }
 
             if (grid[roundedX, roundedY] != null)
             {
