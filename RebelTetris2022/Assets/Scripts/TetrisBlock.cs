@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class TetrisBlock : MonoBehaviour
 {
@@ -16,10 +17,20 @@ public class TetrisBlock : MonoBehaviour
 
     bool canMove = true;
 
+    private int numberOfLinesThisTurn = 0;
+
+    //public bool isPolice;
+
+    public AudioSource AS;
+    public AudioSource ASGameOver;
+
+    //private Rigidbody2D rb;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        AS = GetComponent<AudioSource>();
+        ASGameOver = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -61,22 +72,23 @@ public class TetrisBlock : MonoBehaviour
             {
                 transform.position -= new Vector3(0, -1, 0);
                 AddToGrid();
+
+                //if (isPolice)
+                //{
+                //    //DeleteConnected();
+                //}
+                //else
+                //{
                 CheckForLines();
+                //}
+
+                FindObjectOfType<SpawnTetromino>().UpdateScore(numberOfLinesThisTurn);
                 this.enabled = false;
 
                 if (!gameEnded)
                     FindObjectOfType<SpawnTetromino>().NewTetromino();
             }
-
             previousFallTime = Time.time;
-
-            //original code
-            //transform.position += new Vector3(0, -1, 0);
-            //this.enabled = false;
-            //FindObjectOfType<SpawnTetromino>().NewTetromino();
-            //if (!ValidMove())
-            //    transform.position -= new Vector3(0, -1, 0);
-            //previousTime = Time.time;
         }
     }
 
@@ -84,6 +96,36 @@ public class TetrisBlock : MonoBehaviour
     {
         canMove = true;
     }
+
+    //void DeleteConnected()
+    //{
+
+    //}
+
+    //void CheckIfPolice()
+    //{
+    //    if (gameObject.tag == "Police")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    //void CheckIfPolice(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Police")
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    // jos törmäys objektissa nimeltä PlayerController
+    //    if (collision.gameObject.GetComponent<PlayerController>())
+    //    {
+    //        Destroy(this.gameObject);
+    //    }
+    //}
 
     void CheckForLines()
     {
@@ -104,6 +146,7 @@ public class TetrisBlock : MonoBehaviour
             if (grid[j, i] == null)
                 return false;
         }
+        numberOfLinesThisTurn++;
         return true;
     }
 
@@ -113,6 +156,7 @@ public class TetrisBlock : MonoBehaviour
         {
             Destroy(grid[j, i].gameObject);
             grid[j, i] = null;
+            AS.Play();
         }
     }
 
@@ -145,6 +189,7 @@ public class TetrisBlock : MonoBehaviour
                 // Lopeta peli
 
                 // Poistaa spawnerin
+                ASGameOver.Play();
                 Destroy(FindObjectOfType<SpawnTetromino>());
                 gameEnded = true;
 
