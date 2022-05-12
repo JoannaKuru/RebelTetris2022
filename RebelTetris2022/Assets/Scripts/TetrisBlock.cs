@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.Assertions;
 
 public class TetrisBlock : MonoBehaviour
 {
@@ -19,27 +20,33 @@ public class TetrisBlock : MonoBehaviour
 
     private int numberOfLinesThisTurn = 0;
 
-    //public bool isPolice;
+    public bool isPolice;
 
-    public AudioSource AS;
-    public AudioSource ASGameOver;
-
-    //private Rigidbody2D rb;
+    private AudioSource allAudios;
+    [SerializeField]
+    public AudioClip lineDestroyClip;
+    [SerializeField]
+    public AudioClip gameOverClip;   
+    [SerializeField]
+    public AudioClip levelChangeClip;
 
     // Start is called before the first frame update
     void Start()
     {
-        AS = GetComponent<AudioSource>();
-        ASGameOver = GetComponent<AudioSource>();
+        allAudios = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        Move();
+    }
 
+    void Move()
+    {
         if (Input.GetKey(KeyCode.LeftArrow) && canMove)
         {
-            //move to left
+            // Move to left
             canMove = false;
             transform.position += new Vector3(-1, 0, 0);
             if (!ValidMove())
@@ -49,7 +56,7 @@ public class TetrisBlock : MonoBehaviour
         }
         else if (Input.GetKey(KeyCode.RightArrow) && canMove)
         {
-            //move to right
+            // Move to right
             canMove = false;
             transform.position += new Vector3(1, 0, 0);
             if (!ValidMove())
@@ -59,12 +66,13 @@ public class TetrisBlock : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            //rotate
+            // Rotate
             transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
             if (!ValidMove())
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
         }
 
+        // Accelerates the speed of the Tetromino
         if (Time.time - previousFallTime > (Input.GetKey(KeyCode.DownArrow) ? fallTime / 10 : fallTime))
         {
             transform.position += new Vector3(0, -1, 0);
@@ -75,7 +83,7 @@ public class TetrisBlock : MonoBehaviour
 
                 //if (isPolice)
                 //{
-                //    //DeleteConnected();
+                //    DeleteConnected();
                 //}
                 //else
                 //{
@@ -97,36 +105,7 @@ public class TetrisBlock : MonoBehaviour
         canMove = true;
     }
 
-    //void DeleteConnected()
-    //{
-
-    //}
-
-    //void CheckIfPolice()
-    //{
-    //    if (gameObject.tag == "Police")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    //void CheckIfPolice(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Police")
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
-
-    //private void OnCollisionEnter2D(Collision2D collision)
-    //{
-    //    // jos törmäys objektissa nimeltä PlayerController
-    //    if (collision.gameObject.GetComponent<PlayerController>())
-    //    {
-    //        Destroy(this.gameObject);
-    //    }
-    //}
-
+    // Checks if one row is full of Tetrominoes..
     void CheckForLines()
     {
         for (int i = height - 1; i >= 0; i--)
@@ -139,6 +118,7 @@ public class TetrisBlock : MonoBehaviour
         }
     }
 
+    // ..and if there is, adds the value and returns true..
     bool HasLine(int i)
     {
         for (int j = 0; j < width; j++)
@@ -150,16 +130,17 @@ public class TetrisBlock : MonoBehaviour
         return true;
     }
 
+    // ..so that line/lines can be destroyed..
     void DeleteLine(int i)
     {
         for (int j = 0; j < width; j++)
         {
             Destroy(grid[j, i].gameObject);
             grid[j, i] = null;
-            AS.Play();
         }
     }
 
+    // ..and lines above will move down
     void RowDown(int i)
     {
         for (int y = i; y < height; y++)
@@ -176,6 +157,7 @@ public class TetrisBlock : MonoBehaviour
         }
     }
 
+    // 
     void AddToGrid()
     {
         foreach (Transform children in transform)
@@ -186,19 +168,20 @@ public class TetrisBlock : MonoBehaviour
 
             if (roundedY >= 19)
             {
-                // Lopeta peli
+                // Game over
+                allAudios.PlayOneShot(gameOverClip);
 
-                // Poistaa spawnerin
-                ASGameOver.Play();
+                // Remove spawner
                 Destroy(FindObjectOfType<SpawnTetromino>());
                 gameEnded = true;
 
-                // Lataa scenen uudestaan
+                // Load the scene again
                 //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }
     }
 
+    // Checks if user commands are valid
     bool ValidMove()
     {
         foreach (Transform children in transform)
