@@ -3,7 +3,11 @@ guid: b40cbccb8de56594aaa0cd88ad426c3a
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - lineDestroyClip: {instanceID: 0}
+  - gameOverClip: {instanceID: 0}
+  - levelChangeClip: {instanceID: 0}
+  - gameOverPopUp: {fileID: 5280947960623977369, guid: 207ba17dcccdaa348a6a60fb9764bf9e, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

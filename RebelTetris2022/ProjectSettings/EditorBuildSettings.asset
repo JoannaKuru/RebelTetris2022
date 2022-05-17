@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuideScene.unity
     guid: d057939fd6f960641bc897cd75e98450
+  - enabled: 1
+    path: Assets/Scenes/GOverScene.unity
+    guid: 5b2f2f8a81328a447854487711466267
   m_configObjects: {}

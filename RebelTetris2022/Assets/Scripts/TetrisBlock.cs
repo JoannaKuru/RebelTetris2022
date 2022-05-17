@@ -20,20 +20,18 @@ public class TetrisBlock : MonoBehaviour
 
     private int numberOfLinesThisTurn = 0;
 
-    public bool isPolice;
-
     private AudioSource allAudios;
     [SerializeField]
-    public AudioClip lineDestroyClip;
+    public AudioClip gameOverClip;
+
     [SerializeField]
-    public AudioClip gameOverClip;   
-    [SerializeField]
-    public AudioClip levelChangeClip;
+    private string gameOverScene = "GOverScene";
 
     // Start is called before the first frame update
     void Start()
     {
         allAudios = GetComponent<AudioSource>();
+        gameEnded = false;
     }
 
     // Update is called once per frame
@@ -81,14 +79,7 @@ public class TetrisBlock : MonoBehaviour
                 transform.position -= new Vector3(0, -1, 0);
                 AddToGrid();
 
-                //if (isPolice)
-                //{
-                //    DeleteConnected();
-                //}
-                //else
-                //{
                 CheckForLines();
-                //}
 
                 FindObjectOfType<SpawnTetromino>().UpdateScore(numberOfLinesThisTurn);
                 this.enabled = false;
@@ -105,7 +96,7 @@ public class TetrisBlock : MonoBehaviour
         canMove = true;
     }
 
-    // Checks if one row is full of Tetrominoes..
+    // Check if one row is full of Tetrominoes..
     void CheckForLines()
     {
         for (int i = height - 1; i >= 0; i--)
@@ -118,7 +109,7 @@ public class TetrisBlock : MonoBehaviour
         }
     }
 
-    // ..and if there is, adds the value and returns true..
+    // ..and if there is, add the value and return true to CheckForLines()..
     bool HasLine(int i)
     {
         for (int j = 0; j < width; j++)
@@ -143,21 +134,21 @@ public class TetrisBlock : MonoBehaviour
     // ..and lines above will move down
     void RowDown(int i)
     {
-        for (int y = i; y < height; y++)
+        for (int y = i; y < height; y++) // goes through rows
         {
-            for (int j = 0; j < width; j++)
+            for (int x = 0; x < width; x++) // goes through cells
             {
-                if (grid[j, y] != null)
+                if (grid[x, y] != null) // if cell is not empty..
                 {
-                    grid[j, y - 1] = grid[j, y];
-                    grid[j, y] = null;
-                    grid[j, y - 1].transform.position -= new Vector3(0, 1, 0);
+                    grid[x, y - 1] = grid[x, y]; // move cell up
+                    grid[x, y] = null; // clear cell
+                    grid[x, y - 1].transform.position -= new Vector3(0, 1, 0); // move game object up (the visible one)
                 }
             }
         }
     }
 
-    // 
+    // GAME OVER if at row 19 or higher has a tetromino
     void AddToGrid()
     {
         foreach (Transform children in transform)
@@ -168,20 +159,26 @@ public class TetrisBlock : MonoBehaviour
 
             if (roundedY >= 19)
             {
-                // Game over
+                // Play audio
                 allAudios.PlayOneShot(gameOverClip);
 
                 // Remove spawner
                 Destroy(FindObjectOfType<SpawnTetromino>());
                 gameEnded = true;
 
-                // Load the scene again
-                //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                // After three seconds goes to Game over scene
+                Invoke(nameof(OpenGameOverScene), 3);
             }
         }
     }
 
-    // Checks if user commands are valid
+    // Loads Game over -scene
+    void OpenGameOverScene()
+    {
+        SceneManager.LoadScene(gameOverScene);
+    }
+
+    // Checks if user commands are valid, Tetrominoes doesn't go on/over the grid
     bool ValidMove()
     {
         foreach (Transform children in transform)

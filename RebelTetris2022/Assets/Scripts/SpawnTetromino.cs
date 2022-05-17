@@ -23,8 +23,6 @@ public class SpawnTetromino : MonoBehaviour
     [SerializeField]
     public AudioClip lineDestroyClip;
     [SerializeField]
-    public AudioClip gameOverClip;
-    [SerializeField]
     public AudioClip levelChangeClip;
 
     public TextMeshProUGUI score;

@@ -18,19 +18,13 @@ public class ButtonController : MonoBehaviour
         SceneManager.LoadScene(gameScene);
     }
 
-    // The game stops and Menu scene opens when the button is pressed
+    // The game stops and Menu -scene opens when the button is pressed
     public void BtnExitGame()
     {
         SceneManager.LoadScene(menuScene);
     }
-
-    // A new game starts again when the button is pressed
-    public void BtnRestartGame()
-    {
-        SceneManager.LoadScene(gameScene);
-    }    
     
-    // The Quide scene is opened when the button is pressed
+    // The Quide -scene is opened when the button is pressed
     public void BtnOpenQuide()
     {
         SceneManager.LoadScene(quideScene);
