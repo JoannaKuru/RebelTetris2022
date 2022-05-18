@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3553555676401211378}
   - component: {fileID: 4044350767633563771}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: J2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6809814125877581941}
   - component: {fileID: 2364017648959798881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: J1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3948712074623113312}
   - component: {fileID: 3700834653700830334}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: J4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: -771596620678279349}
   - component: {fileID: 2635342685170693393}
   - component: {fileID: 2768337684041643839}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: J Tetromino
   m_TagString: Tetromino
   m_Icon: {fileID: 0}
@@ -305,10 +305,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationPoint: {x: 1, y: 0, z: 0}
   fallTime: 0.8
-  isPolice: 0
-  lineDestroyClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   gameOverClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
-  levelChangeClip: {fileID: 8300000, guid: 8e8fe61707708bf4f9af6948c7dac3c9, type: 3}
+  gameOverScene: GOverScene
 --- !u!82 &-771596620678279349
 AudioSource:
   m_ObjectHideFlags: 0
@@ -321,7 +319,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -417,7 +415,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -607,7 +605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3959019561825988269}
   - component: {fileID: 4591902331864880344}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: J3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

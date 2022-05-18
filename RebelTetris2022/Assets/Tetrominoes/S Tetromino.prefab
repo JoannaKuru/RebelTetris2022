@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -7959305879944553310}
   - component: {fileID: 433377285666075082}
   - component: {fileID: 7456039829511929432}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: S Tetromino
   m_TagString: Tetromino
   m_Icon: {fileID: 0}
@@ -53,10 +53,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationPoint: {x: 0.5, y: 0.5, z: 0}
   fallTime: 0.8
-  isPolice: 0
-  lineDestroyClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   gameOverClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
-  levelChangeClip: {fileID: 8300000, guid: 8e8fe61707708bf4f9af6948c7dac3c9, type: 3}
+  gameOverScene: GOverScene
 --- !u!82 &-7959305879944553310
 AudioSource:
   m_ObjectHideFlags: 0
@@ -69,7 +67,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -165,7 +163,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -355,7 +353,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2282874238252112500}
   - component: {fileID: 1718424354584407798}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: S1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +437,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4002980246555743500}
   - component: {fileID: 1597430670626239701}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: S4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -523,7 +521,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5669554901264799794}
   - component: {fileID: 983780679972151852}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: S3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -607,7 +605,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4081580994802232374}
   - component: {fileID: 4783427667810438654}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: S2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

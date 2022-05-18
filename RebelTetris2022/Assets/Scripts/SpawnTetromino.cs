@@ -24,10 +24,19 @@ public class SpawnTetromino : MonoBehaviour
     public AudioClip lineDestroyClip;
     [SerializeField]
     public AudioClip levelChangeClip;
+    [SerializeField]
+    public AudioClip policeClip;
 
     public TextMeshProUGUI score;
     public TextMeshProUGUI lines;
     public TextMeshProUGUI level;
+
+    private GameObject previewTetromino;
+    private GameObject nextTetromino;
+
+    private bool gameStarted = false;
+
+    private Vector3 previewTetrominoPosition = new Vector3 (-6, 15, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -39,8 +48,26 @@ public class SpawnTetromino : MonoBehaviour
     // Update is called once per frame
     public void NewTetromino()
     {
-        GameObject Obj = Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], transform.position, Quaternion.identity);
-        Obj.GetComponent<TetrisBlock>().fallTime = fallTime;
+        if (!gameStarted)
+        {
+            gameStarted = true;
+            nextTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], transform.position, Quaternion.identity);
+            nextTetromino.GetComponent<TetrisBlock>().fallTime = fallTime;
+            previewTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], previewTetrominoPosition, Quaternion.identity);
+            previewTetromino.GetComponent<TetrisBlock>().enabled = false;
+        } else
+        {
+            previewTetromino.transform.localPosition = transform.position;
+            nextTetromino = previewTetromino;
+            //if (gameObject.tag == "Police")
+            //{
+            //    allAudios.PlayOneShot(policeClip);
+            //}
+            nextTetromino.GetComponent<TetrisBlock>().enabled = true;
+
+            previewTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], previewTetrominoPosition, Quaternion.identity);
+            previewTetromino.GetComponent<TetrisBlock>().enabled = false;
+        }
     }
 
     // Score + defines audio clips

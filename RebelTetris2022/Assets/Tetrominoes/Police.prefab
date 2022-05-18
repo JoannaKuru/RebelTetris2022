@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1634002415520322671}
   - component: {fileID: 5798711317971931913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6401820330315180504}
   - component: {fileID: 6282582877418593111}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   - component: {fileID: -4156006789551505874}
   - component: {fileID: 6093254084712946905}
   - component: {fileID: -5687486182333863534}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Police
   m_TagString: Police
   m_Icon: {fileID: 0}
@@ -227,10 +227,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rotationPoint: {x: 0, y: 0, z: 0}
   fallTime: 0.8
-  isPolice: 0
-  lineDestroyClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   gameOverClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
-  levelChangeClip: {fileID: 8300000, guid: 8e8fe61707708bf4f9af6948c7dac3c9, type: 3}
+  gameOverScene: GOverScene
 --- !u!82 &-901597716551188782
 AudioSource:
   m_ObjectHideFlags: 0
@@ -243,7 +241,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: df2d4f1aa2713464e92186e14a296fe2, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -339,7 +337,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 23b95db2904bc64498fddcc23e059465, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.5
+  m_Volume: 0.9
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -552,7 +550,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 9ca0e56638ffb5e4e9a98d8f24258f29, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -646,7 +644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8309973665336290843}
   - component: {fileID: 8331337033492547963}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -730,7 +728,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2055678456156816592}
   - component: {fileID: 698932867024671074}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +812,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6559897924096862145}
   - component: {fileID: 3965339407698199202}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +896,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6576042508073194266}
   - component: {fileID: 5053682244888108474}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P8
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -982,7 +980,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2622052423949816148}
   - component: {fileID: 8066342618686982956}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1066,7 +1064,7 @@ GameObject:
   m_Component:
   - component: {fileID: 245108159552802476}
   - component: {fileID: 5418287420698017689}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: P4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
