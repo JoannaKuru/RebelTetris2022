@@ -36,7 +36,7 @@ public class SpawnTetromino : MonoBehaviour
 
     private bool gameStarted = false;
 
-    private Vector3 previewTetrominoPosition = new Vector3 (-6, 15, 0);
+    private Vector3 previewTetrominoPosition = new Vector3 (16, 15, 0);
 
     // Start is called before the first frame update
     void Start()
