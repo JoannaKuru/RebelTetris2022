@@ -16,7 +16,6 @@ public class Sound : MonoBehaviour
         soundOnIcon = btn.image.sprite;
     }
 
-
     // Changes the image and sets the audio mute or on
     public void ButtonClicked()
     {
@@ -32,6 +31,5 @@ public class Sound : MonoBehaviour
             isOn = true;
             AudioListener.volume = 1f;
         }
-
     }
 }

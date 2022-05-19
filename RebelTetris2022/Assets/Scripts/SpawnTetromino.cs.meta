@@ -7,6 +7,7 @@ MonoImporter:
   - lineDestroyClip: {instanceID: 0}
   - levelChangeClip: {instanceID: 0}
   - policeClip: {fileID: 8300000, guid: 9ca0e56638ffb5e4e9a98d8f24258f29, type: 3}
+  - rotateClip: {fileID: 8300000, guid: e02c7299fc5f93c4c95ea87112eced2d, type: 3}
   - score: {instanceID: 0}
   - lines: {instanceID: 0}
   - level: {instanceID: 0}

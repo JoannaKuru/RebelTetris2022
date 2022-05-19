@@ -26,6 +26,8 @@ public class SpawnTetromino : MonoBehaviour
     public AudioClip levelChangeClip;
     [SerializeField]
     public AudioClip policeClip;
+    [SerializeField]
+    public AudioClip rotateClip;
 
     public TextMeshProUGUI score;
     public TextMeshProUGUI lines;
@@ -52,6 +54,7 @@ public class SpawnTetromino : MonoBehaviour
         {
             gameStarted = true;
             nextTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], transform.position, Quaternion.identity);
+
             nextTetromino.GetComponent<TetrisBlock>().fallTime = fallTime;
             previewTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], previewTetrominoPosition, Quaternion.identity);
             previewTetromino.GetComponent<TetrisBlock>().enabled = false;
@@ -59,10 +62,6 @@ public class SpawnTetromino : MonoBehaviour
         {
             previewTetromino.transform.localPosition = transform.position;
             nextTetromino = previewTetromino;
-            //if (gameObject.tag == "Police")
-            //{
-            //    allAudios.PlayOneShot(policeClip);
-            //}
             nextTetromino.GetComponent<TetrisBlock>().enabled = true;
 
             previewTetromino = (GameObject)Instantiate(Tetrominoes[Random.Range(0, Tetrominoes.Length)], previewTetrominoPosition, Quaternion.identity);
@@ -149,5 +148,11 @@ public class SpawnTetromino : MonoBehaviour
     {
         currentScore += score4Lines;
         currentLineCount = currentLineCount + 4;
+    }
+
+    // Plays rotate audio clip
+    public void PlayRotateAudioClip()
+    {
+        allAudios.PlayOneShot(rotateClip);
     }
 }

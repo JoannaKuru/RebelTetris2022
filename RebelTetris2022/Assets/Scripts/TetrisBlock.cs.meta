@@ -4,10 +4,8 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - lineDestroyClip: {instanceID: 0}
   - gameOverClip: {instanceID: 0}
-  - levelChangeClip: {instanceID: 0}
-  - gameOverPopUp: {fileID: 5280947960623977369, guid: 207ba17dcccdaa348a6a60fb9764bf9e, type: 3}
+  - policeClip: {fileID: 8300000, guid: 9ca0e56638ffb5e4e9a98d8f24258f29, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -66,6 +66,9 @@ public class TetrisBlock : MonoBehaviour
         {
             // Rotate
             transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), 90);
+            if (ValidMove())
+                FindObjectOfType<SpawnTetromino>().PlayRotateAudioClip();
+            
             if (!ValidMove())
                 transform.RotateAround(transform.TransformPoint(rotationPoint), new Vector3(0, 0, 1), -90);
         }
