@@ -38,7 +38,7 @@ public class SpawnTetromino : MonoBehaviour
 
     private bool gameStarted = false;
 
-    private Vector3 previewTetrominoPosition = new Vector3 (16, 15, 0);
+    private Vector3 previewTetrominoPosition = new Vector3 (18, 15, 0);
 
     // Start is called before the first frame update
     void Start()
@@ -95,8 +95,8 @@ public class SpawnTetromino : MonoBehaviour
                 allAudios.PlayOneShot(lineDestroyClip);
             }
 
-            if (currentScore >= 200 * scoreMultiplyer)
-            {
+            if (currentScore >= 200 * scoreMultiplyer) // Levels change when score is 200 or more*multiplyer (in the beginning 1) -> falltime-(falltime*0.1f) 
+            {                                          // Multiplyer grows ++ by every loop 
                 fallTime -= fallTime * 0.1f;
                 scoreMultiplyer++;
                 //Debug.Log(fallTime);
